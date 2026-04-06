@@ -7,6 +7,9 @@ export default {
         primary: "#06b6d4",
         secondary: "#EF863E",
       },
+      backgroundImage: {
+        "auth-bg-img": "url('./src/assets/images/auth-img.svg')",
+      },
     },
   },
   plugins: [],
