@@ -61,9 +61,7 @@ const LoginForm = () => {
           Please enter your details to log in
         </p>
 
-        {/* FORM: triggers handleLogin on submit */}
         <form onSubmit={handleLogin}>
-          {/* EMAIL INPUT */}
           <AuthInput
             value={email}
             // LOGIC: input displays state
@@ -77,7 +75,6 @@ const LoginForm = () => {
             type="text"
           />
 
-          {/* PASSWORD INPUT */}
           <AuthInput
             value={password}
             // LOGIC: input linked to password state
@@ -90,17 +87,12 @@ const LoginForm = () => {
             type="password"
           />
 
-          {/* ERROR DISPLAY */}
           {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
-          {/* JS: condition && render
-             LOGIC: show error ONLY if it exists */}
 
-          {/* SUBMIT BUTTON */}
           <button type="submit" className="button-primary">
             LOGIN
           </button>
 
-          {/* SIGNUP LINK */}
           <p className="text-[13px] text-slate-800 mt-3">
             Don't have an account?{" "}
             <Link className="font-medium text-primary underline" to="/signup">
