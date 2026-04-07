@@ -4,6 +4,7 @@ import AuthLayout from "../../components/layout/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
 import ProfilePhotoSelector from "../../components/Input/ProfilePhotoSelector";
 import AuthInput from "../../components/Input/AuthInput";
+import { validateEmail } from "../../utils/helper";
 
 const SignUpForm = () => {
   // State: stores selected profile picture file or image data
@@ -30,8 +31,46 @@ const SignUpForm = () => {
   // Runs when the signup form is submitted
   const handleSignUp = async (e) => {
     e.preventDefault();
-    // Prevent the browser from refreshing the page
-    // Keep form handling inside React
+    // JS: prevents default form behavior (page refresh)
+    // LOGIC: keep control inside React
+    if (!fullName) {
+      // JS: empty string = false
+      // LOGIC: if no password → show error
+      setError("Please enter your full name");
+      return; // stop execution
+    }
+    // VALIDATION 1: check email format
+    if (!validateEmail(email)) {
+      // JS: ! means "not valid"
+      // LOGIC: if email is invalid → show error
+      setError("Please enter a valid email address");
+      return; // stop execution
+    }
+
+    if (!username) {
+      // JS: empty string = false
+      // LOGIC: if no password → show error
+      setError("Please enter your username");
+      return; // stop execution
+    }
+
+    // VALIDATION 2: check password exists
+    if (!password) {
+      // JS: empty string = false
+      // LOGIC: if no password → show error
+      setError("Please enter your password");
+      return; // stop execution
+    }
+
+    // clear error if everything is valid
+    setError("");
+
+    //Sign Up API
+    try {
+      // eslint-disable-next-line no-unused-vars, no-empty
+    } catch (error) {}
+    // NEXT STEP (not done yet):
+    // call backend → login → save token → navigate("/dashboard")
   };
 
   return (
