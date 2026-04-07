@@ -5,12 +5,10 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
   // Ref: gives direct access to the DOM input element
   const inputRef = useRef(null);
 
-  // State: stores preview URL of selected image (for display)
   const [previewUrl, setPreviewUrl] = useState(null);
 
   // Runs when user selects a file
   const handleImageChange = (event) => {
-    // event.target.files → array of selected files
     // LOGIC: will take the selected image and store it
     const file = event.target.files[0];
     if (file) {

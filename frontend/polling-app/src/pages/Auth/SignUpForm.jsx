@@ -7,22 +7,16 @@ import AuthInput from "../../components/Input/AuthInput";
 import { validateEmail } from "../../utils/helper";
 
 const SignUpForm = () => {
-  // State: stores selected profile picture file or image data
   const [profilePic, setProfilePic] = useState(null);
 
-  // State: stores full name input value
   const [fullName, setFullName] = useState("");
 
-  // State: stores email input value
   const [email, setEmail] = useState("");
 
-  // State: stores username input value
   const [username, setUsername] = useState("");
 
-  // State: stores password input value
   const [password, setPassword] = useState("");
 
-  // State: stores error message
   const [error, setError] = useState(null);
 
   // Function from react-router-dom used later to move to another page
@@ -31,35 +25,34 @@ const SignUpForm = () => {
   // Runs when the signup form is submitted
   const handleSignUp = async (e) => {
     e.preventDefault();
-    // JS: prevents default form behavior (page refresh)
-    // LOGIC: keep control inside React
+
+    // VALIDATION 1: check email fullname
+
     if (!fullName) {
-      // JS: empty string = false
       // LOGIC: if no password → show error
       setError("Please enter your full name");
-      return; // stop execution
+      return;
     }
-    // VALIDATION 1: check email format
+    // VALIDATION 2: check email format
     if (!validateEmail(email)) {
-      // JS: ! means "not valid"
       // LOGIC: if email is invalid → show error
       setError("Please enter a valid email address");
-      return; // stop execution
+      return;
     }
+
+    // VALIDATION 3: check email username
 
     if (!username) {
-      // JS: empty string = false
       // LOGIC: if no password → show error
       setError("Please enter your username");
-      return; // stop execution
+      return;
     }
 
-    // VALIDATION 2: check password exists
+    // VALIDATION 4: check password exists
     if (!password) {
-      // JS: empty string = false
       // LOGIC: if no password → show error
       setError("Please enter your password");
-      return; // stop execution
+      return;
     }
 
     // clear error if everything is valid
@@ -75,19 +68,14 @@ const SignUpForm = () => {
 
   return (
     <AuthLayout>
-      {/* Main signup content area */}
       <div className="lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
-        {/* Page title */}
         <h3 className="text-xl font-semibold text-black">Create an Account</h3>
 
-        {/* Subtitle */}
         <p className="text-xs text-slate-700 mt-[5px] mb-6">
           Join us today by entering your details below.
         </p>
 
-        {/* Form submit triggers handleSignUp */}
         <form onSubmit={handleSignUp}>
-          {/* Reusable component to choose profile photo */}
           <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <AuthInput
@@ -102,7 +90,6 @@ const SignUpForm = () => {
               // LOGIC: input displays state
 
               onChange={({ target }) => setEmail(target.value)}
-              // JS: destructuring event → target.value
               // LOGIC: user types → update email state
 
               label="Email Address"

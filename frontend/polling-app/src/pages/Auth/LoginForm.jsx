@@ -5,11 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
 
 const LoginForm = () => {
-  // STATE: store user input (React controls the form)
   const [email, setEmail] = useState(""); // email starts empty
   const [password, setPassword] = useState(""); // password starts empty
 
-  // STATE: store error message (null = no error)
   const [error, setError] = useState(null);
 
   // navigation function (will be used after login success)
@@ -19,23 +17,20 @@ const LoginForm = () => {
   // Handle Login form Submit
   const handleLogin = async (e) => {
     e.preventDefault();
-    // JS: prevents default form behavior (page refresh)
     // LOGIC: keep control inside React
 
     // VALIDATION 1: check email format
     if (!validateEmail(email)) {
-      // JS: ! means "not valid"
       // LOGIC: if email is invalid → show error
       setError("Please enter a valid email address");
-      return; // stop execution
+      return;
     }
 
     // VALIDATION 2: check password exists
     if (!password) {
-      // JS: empty string = false
       // LOGIC: if no password → show error
       setError("Please enter your password");
-      return; // stop execution
+      return;
     }
 
     // clear error if everything is valid
@@ -51,12 +46,9 @@ const LoginForm = () => {
 
   return (
     <AuthLayout>
-      {/* UI container */}
       <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
-        {/* Title */}
         <h3 className="text-xl font-semibold text-black">Welcome Back</h3>
 
-        {/* Subtitle */}
         <p className="text-xs text-slate-700 mt-[5px] mb-6">
           Please enter your details to log in
         </p>
