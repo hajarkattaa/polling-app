@@ -5,6 +5,9 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
+const authRoutes = require("./routes/authRoutes"); // Import authentication routes
+// Import the function to connect to the MongoDB database
+const connectDB = require("./config/db");
 // Create a new Express application instance
 const app = express();
 
@@ -21,8 +24,16 @@ app.use(
 // Parse incoming JSON request bodies automatically
 app.use(express.json());
 
+// Connect to the MongoDB database before starting the server
+connectDB();
+
+app.use("/api/v1/auth", authRoutes); // Use the auth routes for handling authentication-related endpoints
 // Use the PORT from env if available, otherwise default to 5000
 const PORT = process.env.PORT || 5000;
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the Polling App API");
+});
 
 // Start the server and listen for incoming requests on the configured port
 app.listen(PORT, () => {
